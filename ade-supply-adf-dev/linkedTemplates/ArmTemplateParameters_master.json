@@ -1,0 +1,70 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ade-supply-adf-dev"
+		},
+		"ls_azuresql_server_password": {
+			"value": ""
+		},
+		"ls_source_adls_accountKey": {
+			"value": ""
+		},
+		"ls_target_sql_password": {
+			"value": ""
+		},
+		"ls_azuresql_server_properties_typeProperties_server": {
+			"value": "sqlserveradedev.database.windows.net"
+		},
+		"ls_azuresql_server_properties_typeProperties_database": {
+			"value": "sqldbadedev"
+		},
+		"ls_azuresql_server_properties_typeProperties_userName": {
+			"value": "venkysura"
+		},
+		"ls_source_adls_properties_typeProperties_url": {
+			"value": "https://adlsgen2accountdev.dfs.core.windows.net"
+		},
+		"ls_target_sql_properties_typeProperties_server": {
+			"value": "sqlserveradedev.database.windows.net"
+		},
+		"ls_target_sql_properties_typeProperties_database": {
+			"value": "sqldbadetargetdev"
+		},
+		"ls_target_sql_properties_typeProperties_userName": {
+			"value": "venkysura"
+		},
+		"daily_load_trigger_properties_pl_Custom_Full_Load_parameters_TableList": {
+			"value": [
+				{
+					"tableName": "iplteams",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				},
+				{
+					"tableName": "employees",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				},
+				{
+					"tableName": "salesitems",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				}
+			]
+		},
+		"tumbling_window_trigger_properties_pipeline_parameters_StartDate": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"tumbling_window_trigger_properties_pipeline_parameters_EndDate": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

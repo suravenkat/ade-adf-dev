@@ -1,0 +1,10 @@
+{
+	"container": {
+		"type": "string",
+		"value": "adegen2container"
+	},
+	"TargetFilePath": {
+		"type": "string",
+		"value": "target"
+	}
+}

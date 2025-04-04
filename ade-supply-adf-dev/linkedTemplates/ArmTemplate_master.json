@@ -1,0 +1,209 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ade-supply-adf-dev"
+		},
+		"ls_azuresql_server_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_azuresql_server'"
+		},
+		"ls_source_adls_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_source_adls'"
+		},
+		"ls_target_sql_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_target_sql'"
+		},
+		"ls_azuresql_server_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserveradedev.database.windows.net"
+		},
+		"ls_azuresql_server_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqldbadedev"
+		},
+		"ls_azuresql_server_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "venkysura"
+		},
+		"ls_source_adls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsgen2accountdev.dfs.core.windows.net"
+		},
+		"ls_target_sql_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sqlserveradedev.database.windows.net"
+		},
+		"ls_target_sql_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sqldbadetargetdev"
+		},
+		"ls_target_sql_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "venkysura"
+		},
+		"daily_load_trigger_properties_pl_Custom_Full_Load_parameters_TableList": {
+			"type": "array",
+			"defaultValue": [
+				{
+					"tableName": "iplteams",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				},
+				{
+					"tableName": "employees",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				},
+				{
+					"tableName": "salesitems",
+					"tableSchemaName": "dbo",
+					"WaterMark_Column": "last_updated"
+				}
+			]
+		},
+		"tumbling_window_trigger_properties_pipeline_parameters_StartDate": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"tumbling_window_trigger_properties_pipeline_parameters_EndDate": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ade-supply-adf-dev_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_azuresql_server_password": {
+						"value": "[parameters('ls_azuresql_server_password')]"
+					},
+					"ls_source_adls_accountKey": {
+						"value": "[parameters('ls_source_adls_accountKey')]"
+					},
+					"ls_target_sql_password": {
+						"value": "[parameters('ls_target_sql_password')]"
+					},
+					"ls_azuresql_server_properties_typeProperties_server": {
+						"value": "[parameters('ls_azuresql_server_properties_typeProperties_server')]"
+					},
+					"ls_azuresql_server_properties_typeProperties_database": {
+						"value": "[parameters('ls_azuresql_server_properties_typeProperties_database')]"
+					},
+					"ls_azuresql_server_properties_typeProperties_userName": {
+						"value": "[parameters('ls_azuresql_server_properties_typeProperties_userName')]"
+					},
+					"ls_source_adls_properties_typeProperties_url": {
+						"value": "[parameters('ls_source_adls_properties_typeProperties_url')]"
+					},
+					"ls_target_sql_properties_typeProperties_server": {
+						"value": "[parameters('ls_target_sql_properties_typeProperties_server')]"
+					},
+					"ls_target_sql_properties_typeProperties_database": {
+						"value": "[parameters('ls_target_sql_properties_typeProperties_database')]"
+					},
+					"ls_target_sql_properties_typeProperties_userName": {
+						"value": "[parameters('ls_target_sql_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ade-supply-adf-dev_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ade-supply-adf-dev_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ade-supply-adf-dev_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ade-supply-adf-dev_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "ade-supply-adf-dev_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"daily_load_trigger_properties_pl_Custom_Full_Load_parameters_TableList": {
+						"value": "[parameters('daily_load_trigger_properties_pl_Custom_Full_Load_parameters_TableList')]"
+					},
+					"tumbling_window_trigger_properties_pipeline_parameters_StartDate": {
+						"value": "[parameters('tumbling_window_trigger_properties_pipeline_parameters_StartDate')]"
+					},
+					"tumbling_window_trigger_properties_pipeline_parameters_EndDate": {
+						"value": "[parameters('tumbling_window_trigger_properties_pipeline_parameters_EndDate')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ade-supply-adf-dev_ArmTemplate_2')]"
+			]
+		}
+	]
+}
