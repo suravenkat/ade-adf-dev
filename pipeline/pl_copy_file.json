@@ -7,7 +7,14 @@
 				"name": "copy_csv_file",
 				"description": "copy_csv_file",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "new_change",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -61,6 +68,15 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "new_change",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
 			}
 		],
 		"annotations": [],
