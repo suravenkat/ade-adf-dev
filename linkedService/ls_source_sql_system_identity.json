@@ -1,0 +1,14 @@
+{
+	"name": "ls_source_sql_system_identity",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sqlserveradedev.database.windows.net",
+			"database": "sqldbadedev",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SystemAssignedManagedIdentity"
+		}
+	}
+}
