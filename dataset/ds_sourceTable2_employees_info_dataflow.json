@@ -1,0 +1,30 @@
+{
+	"name": "ds_sourceTable2_employees_info_dataflow",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_azuresql_server",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "location",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mobile_num",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "employees_info"
+		}
+	}
+}
