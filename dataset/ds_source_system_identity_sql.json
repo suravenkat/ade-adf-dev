@@ -1,0 +1,30 @@
+{
+	"name": "ds_source_system_identity_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_source_sql_system_identity",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "location",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mobile_num",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "employees_info"
+		}
+	}
+}
