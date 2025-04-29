@@ -143,9 +143,9 @@
 							"sourceSystemId": "2023",
 							"sourceSystemName": "sales",
 							"Job_Run_ID": "20231113121245641",
-							"HZ_DB_Name": "dev_database",
+							"HZ_DB_Name": "hive_metastore.dev_database",
 							"watermark_column": "last_updated",
-							"Error_DB_Name": "dev_database",
+							"Error_DB_Name": "hive_metastore.dev_database",
 							"Error_Data_Lake_object": "err_employees_last07",
 							"tableColumns": [
 								{
